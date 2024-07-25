@@ -308,6 +308,9 @@ class _AzureSearchSettings(BaseSettings, DatasourcePayloadConstructor):
         self.query_type = to_snake(self.query_type)
 
     def _set_filter_string(self, request: Request) -> str:
+        #TODO: REMOVE THIS
+        test = request.headers.get("X-MS-TOKEN-AAD-ACCESS-TOKEN", "")
+        logging.debug(f"USER TOKEN: {test}")
         if self.permitted_groups_column:
             user_token = request.headers.get("X-MS-TOKEN-AAD-ACCESS-TOKEN", "")
             logging.debug(f"USER TOKEN is {'present' if user_token else 'not present'}")
