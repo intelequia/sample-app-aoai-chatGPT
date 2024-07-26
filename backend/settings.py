@@ -308,9 +308,6 @@ class _AzureSearchSettings(BaseSettings, DatasourcePayloadConstructor):
         self.query_type = to_snake(self.query_type)
 
     def _set_filter_string(self, request: Request) -> str:
-        #TODO: REMOVE THIS
-        test = request.headers.get("X-MS-TOKEN-AAD-ACCESS-TOKEN", "")
-        logging.debug(f"USER TOKEN: {test}")
         if self.permitted_groups_column:
             user_token = request.headers.get("X-MS-TOKEN-AAD-ACCESS-TOKEN", "")
             logging.debug(f"USER TOKEN is {'present' if user_token else 'not present'}")
@@ -324,6 +321,7 @@ class _AzureSearchSettings(BaseSettings, DatasourcePayloadConstructor):
             return filter_string
         
         return None
+
             
     def construct_payload_configuration(
         self,
@@ -331,8 +329,8 @@ class _AzureSearchSettings(BaseSettings, DatasourcePayloadConstructor):
         **kwargs
     ):
         request = kwargs.pop('request', None)
-        if request and self.permitted_groups_column:
-            self.filter = self._set_filter_string(request)
+        #if request and self.permitted_groups_column:
+            #self.filter = self._set_filter_string(request)
             
         self.embedding_dependency = \
             self._settings.azure_openai.extract_embedding_dependency()
