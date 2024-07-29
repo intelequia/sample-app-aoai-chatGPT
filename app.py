@@ -266,6 +266,7 @@ def prepare_model_args(request_body, request_headers):
                     ]["authentication"][field] = "*****"
 
     if app_settings.datasource.permitted_groups_column is not None:
+        logging.debug(f"EXTRA FILTER: {app_settings.datasource.filter}")
         model_args["extra_body"]["data_sources"][0]["parameters"]["filter"] = app_settings.datasource.filter
 
     logging.debug(f"REQUEST BODY: {json.dumps(model_args_clean, indent=4)}")
