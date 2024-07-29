@@ -329,8 +329,8 @@ class _AzureSearchSettings(BaseSettings, DatasourcePayloadConstructor):
         **kwargs
     ):
         request = kwargs.pop('request', None)
-        #if request and self.permitted_groups_column:
-            #self.filter = self._set_filter_string(request)
+        if request and self.permitted_groups_column:
+            self.filter = self._set_filter_string(request)
             
         self.embedding_dependency = \
             self._settings.azure_openai.extract_embedding_dependency()
