@@ -72,7 +72,7 @@ def generateFilterString(userToken):
         logging.debug("No user groups found")
 
     group_ids = ", ".join([obj["id"] for obj in userGroups])
-    return f"{AZURE_SEARCH_PERMITTED_GROUPS_COLUMN}/any(g:search.in(g, '{group_ids}'))"
+    return f"{AZURE_SEARCH_PERMITTED_GROUPS_COLUMN}/any(g:search.in(g, '{group_ids}'))  or not {AZURE_SEARCH_PERMITTED_GROUPS_COLUMN}/any()"
 
 
 def format_non_streaming_response(chatCompletion, history_metadata, apim_request_id):

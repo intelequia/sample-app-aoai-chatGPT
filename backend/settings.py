@@ -321,6 +321,7 @@ class _AzureSearchSettings(BaseSettings, DatasourcePayloadConstructor):
             return filter_string
         
         return None
+
             
     def construct_payload_configuration(
         self,
